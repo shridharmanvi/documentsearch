@@ -10,6 +10,13 @@ import java.util.Queue;
 
 public class Application {
 
+    /**
+     * Read properties file here
+     */
+    static {
+
+    }
+
     public static Search getSearchObj(int method) {
         Search searchMethod = null;
 

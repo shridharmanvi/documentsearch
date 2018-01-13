@@ -7,19 +7,18 @@ import java.util.Map;
  */
 public class FileNode {
     private String fileName;
-    private Map<String, Integer> counter;
+    private Object details;
 
-    public FileNode(String fileName, Map<String, Integer> counter) {
+    public FileNode(String fileName, Object details) {
         this.fileName = fileName;
-        this.counter = counter;
+        this.details = details;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public Map<String, Integer> getCounter() {
-        return counter;
+    public Object getDetails() {
+        return details;
     }
-
 }

@@ -1,17 +1,19 @@
 package com.docsearch.impl.indexed;
 
 import com.docsearch.Search;
+import com.docsearch.impl.FileUtils;
 import com.docsearch.model.FileNode;
 import com.docsearch.model.ResultSetNode;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.*;
 
 public class IndexedSearch implements Search {
     private LinkedList<FileNode> fileNodes;
+    private FileUtils fileUtils;
 
     public IndexedSearch() {
+        fileUtils = new FileUtils();
         fileNodes = new LinkedList<>();
     }
 
@@ -19,11 +21,9 @@ public class IndexedSearch implements Search {
 
         for (String fileName : files) {
 
-            FileReader fileReader = null;
             String line = null;
             try {
-                fileReader = new FileReader(fileName);
-                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                BufferedReader bufferedReader = fileUtils.readFile(fileName);
 
                 Map<String, Integer> counter = new HashMap<>();
                 FileNode fileNode = new FileNode(fileName, counter);
@@ -48,10 +48,10 @@ public class IndexedSearch implements Search {
 
         while (!fileNodes.isEmpty()) {
             FileNode fileNode = fileNodes.remove();
+            Map<String, Integer> counter = (Map<String, Integer>) fileNode.getDetails();
             int count = 0;
-            if (fileNode.getCounter().containsKey(token)) {
-                count = fileNode.getCounter().get(token);
-            }
+
+            if (counter.containsKey(token)) count = counter.get(token);
 
             ResultSetNode finalCount = new ResultSetNode(fileNode.getFileName(), count);
             queue.add(finalCount);
