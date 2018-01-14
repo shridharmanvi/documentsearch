@@ -21,6 +21,7 @@ public class DocumentSearchDriver {
     private static Properties config;
 
     public DocumentSearchDriver() {
+        config = new Properties();
         relevancy = null;
         documentSearch = null;
         method = 0;
@@ -76,7 +77,7 @@ public class DocumentSearchDriver {
     }
 
     private Properties readConfig() {
-        if (config == null) {
+        if (config == null || config.size() == 0) {
             try {
                 InputStream inputStream = DocumentSearchDriver.class
                         .getClassLoader()
