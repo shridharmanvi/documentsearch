@@ -8,11 +8,12 @@ import org.junit.Test;
 
 import java.util.Queue;
 
+import static org.junit.Assert.assertEquals;
+
 public class TestSimple implements TestSearch {
 
     private SimpleDocumentSearch simpleSearch;
-    private String[] files;
-    private String line = "This is a sample sample test line test test Test!";
+
     private static String TOKEN = "Test";
 
     @Before
@@ -25,15 +26,22 @@ public class TestSimple implements TestSearch {
     @Override
     @Test
     public void searchToken() {
-        int count = simpleSearch.searchToken(TOKEN, line);
-        System.out.println(count);
-    }
+        String line = "This is a sample sample test line test test Test!";
 
-    @Override
-    @Test
-    public void testDataLoad() {
-        // Test data load from files into container here
+        String token1 = "is";
+        assertEquals(1, simpleSearch.searchToken(token1, line));
 
+        String token2 = "sample";
+        assertEquals(2, simpleSearch.searchToken(token2, line));
+
+        String token3 = "test";
+        assertEquals(3, simpleSearch.searchToken(token3, line));
+
+        String token4 = "Test";
+        assertEquals(1, simpleSearch.searchToken(token4, line));
+
+        String token5 = "absent";
+        assertEquals(0, simpleSearch.searchToken(token5, line));
     }
 
     @Override

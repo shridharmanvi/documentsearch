@@ -14,6 +14,7 @@ import java.util.*;
  * a file etc are done here to avoid duplication
  */
 public class BaseDocumentSearchImpl implements DocumentSearch {
+    protected static String SPECIALCHARS = "[^a-zA-Z0-9]";
     protected FileUtils fileUtils;
     protected LinkedList<FileNode> fileNodes;
     protected Queue<ResultSetNode> queue;
@@ -41,6 +42,7 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
             List<String> lines = new ArrayList<>();
 
             while ((line = bufferedReader.readLine()) != null) {
+                String cleanLine = line.replaceAll(SPECIALCHARS, "");
                 lines.add(line);
             }
 

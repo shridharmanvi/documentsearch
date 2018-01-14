@@ -1,6 +1,7 @@
 package com.docsearch.impl.indexed;
 
 import com.docsearch.DocumentSearch;
+import com.docsearch.impl.BaseDocumentSearchImpl;
 import com.docsearch.impl.FileUtils;
 import com.docsearch.model.FileNode;
 import com.docsearch.model.ResultSetNode;
@@ -10,10 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class IndexedDocumentSearch implements DocumentSearch {
+public class IndexedDocumentSearch extends BaseDocumentSearchImpl {
     private LinkedList<FileNode> fileNodes;
     private FileUtils fileUtils;
-    private static String SPECIALCHARS = "[-+.^:,]";
 
     public IndexedDocumentSearch() {
         fileUtils = new FileUtils();
@@ -23,7 +23,7 @@ public class IndexedDocumentSearch implements DocumentSearch {
     public void setup(String[] files) throws IOException {
 
         for (String fileName : files) {
-            String line = null;
+            String line;
 
             BufferedReader bufferedReader = fileUtils.readFile(fileName);
 
@@ -54,15 +54,21 @@ public class IndexedDocumentSearch implements DocumentSearch {
         while (!fileNodes.isEmpty()) {
             FileNode fileNode = fileNodes.remove();
             Map<String, Integer> counter = (Map<String, Integer>) fileNode.getDetails();
-            int count = 0;
+            int count;
 
-            if (counter.containsKey(token)) count = counter.get(token);
+            count = searchToken(counter, token);
 
             ResultSetNode finalCount = new ResultSetNode(fileNode.getFileName(), count);
             queue.add(finalCount);
         }
 
         return queue;
+    }
+
+    public int searchToken(Map<String, Integer> counter, String token) {
+        int count = 0;
+        if (counter.containsKey(token)) count = counter.get(token);
+        return count;
     }
 
 }

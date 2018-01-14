@@ -27,13 +27,6 @@ public class TestRegex implements TestSearch {
 
     @Override
     @Test
-    public void testDataLoad() {
-
-
-    }
-
-    @Override
-    @Test
     public void testSearch() {
         Pattern pattern = Pattern.compile(TOKEN);
 
