@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static com.docsearch.DocumentSearchDriver.getInputFileNames;
 
@@ -20,7 +18,7 @@ public class PerformanceTest {
 
     }
 
-    public List<String> generateRandomWords() {
+    public List<String> buildTokens() {
         List<String> tokens = new ArrayList<>();
 
         tokens.add("the");
@@ -43,7 +41,7 @@ public class PerformanceTest {
     @Test
     public void runTest() throws IOException {
         int[] documentSearchTypes = {1, 2, 3};
-        List<String> allTokens = generateRandomWords();
+        List<String> allTokens = buildTokens();
 
         // Perform test for each search method
         for (int documentSearchType : documentSearchTypes) {
@@ -52,7 +50,6 @@ public class PerformanceTest {
             // Initial set up for each search implementation
             DocumentSearch search = SearchFactory.getSearchObj(documentSearchType);
             search.setup(getInputFileNames());
-
 
             long start;
             long end;

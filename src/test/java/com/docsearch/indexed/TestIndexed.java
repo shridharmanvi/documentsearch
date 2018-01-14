@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -31,22 +33,23 @@ public class TestIndexed implements TestSearch {
     @Override
     @Test
     public void searchToken() {
-//        String line = "This is a sample sample test line test test Test!";
-//
-//        String token1 = "is";
-//        assertEquals(1, indexedDocumentSearch.searchToken(token1, line));
-//
-//        String token2 = "sample";
-//        assertEquals(2, indexedDocumentSearch.searchToken(token2, line));
-//
-//        String token3 = "test";
-//        assertEquals(3, indexedDocumentSearch.searchToken(token3, line));
-//
-//        String token4 = "Test";
-//        assertEquals(1, indexedDocumentSearch.searchToken(token4, line));
-//
-//        String token5 = "absent";
-//        assertEquals(0, indexedDocumentSearch.searchToken(token5, line));
+        String line = "This is a sample sample test line test test Test!";
+        Map<String, Integer> counter = populateCounter(line);
+
+        String token1 = "is";
+        assertEquals(1, indexedDocumentSearch.searchToken(counter, token1));
+
+        String token2 = "sample";
+        assertEquals(2, indexedDocumentSearch.searchToken(counter, token2));
+
+        String token3 = "test";
+        assertEquals(3, indexedDocumentSearch.searchToken(counter, token3));
+
+        String token4 = "Test!";
+        assertEquals(1, indexedDocumentSearch.searchToken(counter, token4));
+
+        String token5 = "absent";
+        assertEquals(0, indexedDocumentSearch.searchToken(counter, token5));
     }
 
     @Override
@@ -72,5 +75,15 @@ public class TestIndexed implements TestSearch {
 
             assertEquals(expectedNode.getCount(), actualNode.getCount());
         }
+    }
+
+
+    private Map<String, Integer> populateCounter(String line) {
+        Map<String, Integer> counter = new HashMap<>();
+
+        for (String word : line.split(" ")) {
+            counter.put(word, counter.getOrDefault(word, 0) + 1);
+        }
+        return counter;
     }
 }

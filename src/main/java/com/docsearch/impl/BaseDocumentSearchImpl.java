@@ -3,6 +3,7 @@ package com.docsearch.impl;
 import com.docsearch.DocumentSearch;
 import com.docsearch.model.FileNode;
 import com.docsearch.model.ResultSetNode;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
 
             while ((line = bufferedReader.readLine()) != null) {
                 String cleanLine = line.replaceAll(SPECIALCHARS, "");
-                lines.add(line);
+                lines.add(cleanLine);
             }
 
             FileNode fileNode = new FileNode(fileName, lines);
@@ -51,14 +52,22 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
         }
     }
 
+    /**
+     * Simple token validation
+     *
+     * @param token
+     */
     @Override
     public void setAndValidateToken(String token) {
-        this.token= token;
-        if (token.isEmpty()) {
+        this.token = token;
+        if (StringUtils.isEmpty(token)) {
             throw new RuntimeException("Invalid token entered! Exiting..");
         }
     }
 
+    /**
+     * Every child method overrides and implements this method
+     */
     @Override
     public Queue<ResultSetNode> search(String token) {
         return null;

@@ -19,7 +19,6 @@ public class TestSimple implements TestSearch {
     @Before
     public void setUp() {
         simpleSearch = new SimpleDocumentSearch();
-        // simpleSearch.setup();
     }
 
 
