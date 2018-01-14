@@ -44,31 +44,35 @@ public class PerformanceTest {
     public void runTest() throws IOException {
         int[] documentSearchTypes = {1, 2, 3};
         List<String> allTokens = generateRandomWords();
-        String token = "the";
 
         // Perform test for each search method
         for (int documentSearchType : documentSearchTypes) {
-            int iterations = 200000;
+            int iterations = 2000000;
 
             // Initial set up for each search implementation
             DocumentSearch search = SearchFactory.getSearchObj(documentSearchType);
             search.setup(getInputFileNames());
-            search.setAndValidateToken(token);
 
-            long start = System.currentTimeMillis();
-            long end = 0;
-            long avg;
+
+            long start;
+            long end;
+            long total = 0;
 
             for (int j = 0; j < 10; j++) {
-                for (int i = 0; i < iterations; i++) {
+                // Get random search token
+                String token = getRandomWord(allTokens);
+                search.setAndValidateToken(token);
+
+
+                start = System.currentTimeMillis();
+                for (int i = 0; i < iterations / 10; i++) {
                     search.search(token);
                 }
                 end = System.currentTimeMillis();
+                total += end - start;
             }
 
-            avg = end - start;
-
-            System.out.println("Method " + documentSearchType + " took " + avg + "ms for 2000000 iterartions.");
+            System.out.println("Method " + documentSearchType + " took " + total + "ms for 2000000 iterartions.");
 
         }
     }
