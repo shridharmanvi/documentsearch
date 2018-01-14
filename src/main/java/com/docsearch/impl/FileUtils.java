@@ -3,7 +3,6 @@ package com.docsearch.impl;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.nio.Buffer;
 
 public class FileUtils {
 
@@ -11,5 +10,14 @@ public class FileUtils {
         FileReader fileReader = new FileReader(path);
         BufferedReader br = new BufferedReader(fileReader);
         return br;
+    }
+
+    private static void setPropertiesFileLocations() {
+        Object p = System.getProperty("plugins.properties");
+        if (p == null || ((String) p).length() == 0) {
+            System.setProperty("plugins.properties", "classpath:properties/config.properties");
+        } else {
+            System.setProperty("plugins.properties", "file:" + p);
+        }
     }
 }
