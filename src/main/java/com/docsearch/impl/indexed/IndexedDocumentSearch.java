@@ -41,15 +41,7 @@ public class IndexedDocumentSearch extends BaseDocumentSearchImpl {
         }
     }
 
-    @Override
-    public void setAndValidateToken(String token) {
-        if (token.isEmpty()) {
-            throw new RuntimeException("");
-        }
-    }
-
     public Queue<ResultSetNode> search(String token) {
-        Queue<ResultSetNode> queue = new PriorityQueue<>((ResultSetNode a, ResultSetNode b) -> b.getCount() - a.getCount());
 
         while (!fileNodes.isEmpty()) {
             FileNode fileNode = fileNodes.remove();
@@ -66,9 +58,7 @@ public class IndexedDocumentSearch extends BaseDocumentSearchImpl {
     }
 
     public int searchToken(Map<String, Integer> counter, String token) {
-        int count = 0;
-        if (counter.containsKey(token)) count = counter.get(token);
-        return count;
+        return counter.getOrDefault(token, 0);
     }
 
 }

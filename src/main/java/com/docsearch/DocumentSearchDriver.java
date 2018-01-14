@@ -65,7 +65,8 @@ public class DocumentSearchDriver {
         }
     }
 
-    private String[] getInputFileNames() {
+    public static String[] getInputFileNames() {
+        config = readConfig();
         String[] files = config.getProperty("inputfiles.files").split(",");
         String inputDir = config.getProperty("inputfiles.dir");
         String[] fullNames = new String[files.length];
@@ -76,13 +77,13 @@ public class DocumentSearchDriver {
         return fullNames;
     }
 
-    private Properties readConfig() {
+    static Properties readConfig() {
         if (config == null || config.size() == 0) {
             try {
                 InputStream inputStream = DocumentSearchDriver.class
                         .getClassLoader()
                         .getResourceAsStream("config.properties");
-
+                config = new Properties();
                 config.load(inputStream);
             } catch (IOException e) {
                 throw new RuntimeException("Cannot read properties file!!");
