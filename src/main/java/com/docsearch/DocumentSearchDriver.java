@@ -65,7 +65,7 @@ class DocumentSearchDriver {
         }
     }
 
-    static String[] getInputFileNames() {
+    private String[] getInputFileNames() {
         config = readConfig();
         String[] files = config.getProperty("inputfiles.files").split(",");
         String inputDir = config.getProperty("inputfiles.dir");
@@ -77,7 +77,7 @@ class DocumentSearchDriver {
         return fullNames;
     }
 
-    private static Properties readConfig() {
+    private Properties readConfig() {
         if (config == null || config.size() == 0) {
             try {
                 InputStream inputStream = DocumentSearchDriver.class

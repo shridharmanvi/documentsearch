@@ -56,9 +56,9 @@ pattern matching are O(n) since they have to iterate over the file content on ev
 
 ```bash
 PERFORMANCE TEST: 
-Method 1 took 90ms for 2000000 iterartions.
-Method 2 took 599ms for 2000000 iterartions.
-Method 3 took 13ms for 2000000 iterartions.
+Method 1 took 249ms for 2000000 iterartions.
+Method 2 took 1281ms for 2000000 iterartions.
+Method 3 took 22ms for 2000000 iterartions.
 ```
 
 ##### Further enhancements:

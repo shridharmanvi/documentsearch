@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.docsearch.DocumentSearchDriver.getInputFileNames;
-
 /**
  * Running performance tests in this class
  */
@@ -84,5 +82,16 @@ public class PerformanceTest {
             System.out.println("Method " + documentSearchType + " took " + total + "ms for 2000000 iterartions.");
 
         }
+    }
+
+    private String[] getInputFileNames() {
+        String[] files = {"french_armed_forces.txt", "hitchhikers.txt", "warp_drive.txt"};
+        String inputDir = "src/test/resources/test_files/";
+        String[] fullNames = new String[files.length];
+
+        for (int i = 0; i < files.length; i++) {
+            fullNames[i] = inputDir + files[i];
+        }
+        return fullNames;
     }
 }
