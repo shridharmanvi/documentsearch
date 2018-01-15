@@ -66,11 +66,11 @@ Method 3 took 13ms for 2000000 iterartions.
 * Indexed approach is the best for document search. However the solution implemented for this 
 exercise is primitive as it cannot be easily scaled
 * If the volume of test files increase there are chances of running into memory issues on a single node
-* We could make the app distributed and by making it a RESTful service and using a load balancer to distribute the 
+* We could make the app distributed by making it a RESTful service and using a load balancer to distribute the 
 load and store the counters in an in-memory key-value database like redis
 * An alternative could be to use a distributed indexing system like Solr/lucene/elastic search
-* These are distributed over multiple nodes (cluster) and can be scaled horizontally in case the data 
-volume increases
+* These systems are distributed over multiple nodes (cluster) and can be scaled horizontally in case the data 
+volume increases and also provide built in fault tolerance capabilities
 
 
 
