@@ -26,7 +26,7 @@ inputfiles.dir=/path/to/inputfiles/dir
 inputfiles.files=file1.txt,file2.txt,file3.txt
 
 # Step 5: Execute the program
-java -Dproperties=config.properties -jar DocumentSearchMain.jar
+/path/to/java -Dconfig.file=/path/to/config.properties -jar target/documentsearch-{version}.jar
 
 ```
 
@@ -42,8 +42,8 @@ mvn clean test
 Performance testing is done by calling the search method of each of the implementations 2000000 times and comparing the 
 run times. At a step size of 20,000 a new random token is chosen. The total is recorded over all of the iterations.
 
-To run the performance test simply execute the PerformanceTest main jar
-`java -jar PerformanceTest.jar`
+To run the performance test simply execute the tests
+`mvn clean test`
 
 
 ##### Stats/Results
