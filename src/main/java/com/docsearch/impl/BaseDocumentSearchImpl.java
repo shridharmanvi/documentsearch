@@ -4,6 +4,8 @@ import com.docsearch.DocumentSearch;
 import com.docsearch.model.FileNode;
 import com.docsearch.model.ResultSetNode;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +22,7 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
     protected LinkedList<FileNode> fileNodes;
     protected Queue<ResultSetNode> queue;
     protected String token;
+    private static Logger LOG = LoggerFactory.getLogger(BaseDocumentSearchImpl.class);
 
     public BaseDocumentSearchImpl() {
         token = null;
@@ -63,6 +66,7 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
     public void setAndValidateToken(String token) {
         this.token = token;
         if (StringUtils.isEmpty(token)) {
+            LOG.error("Invalid token entered! Exiting..");
             throw new RuntimeException("Invalid token entered! Exiting..");
         }
     }
