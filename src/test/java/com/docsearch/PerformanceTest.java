@@ -1,6 +1,7 @@
 package com.docsearch;
 
 import com.docsearch.impl.SearchFactory;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +46,9 @@ public class PerformanceTest {
         return tokens.get((int) (Math.random() * tokens.size()));
     }
 
-    private void runTest() throws IOException {
+    @Test
+    public void runTest() throws IOException {
+        System.out.println("PERFORMANCE TEST: ");
         int[] documentSearchTypes = {1, 2, 3};
         List<String> allTokens = buildTokens();
 

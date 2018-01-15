@@ -29,3 +29,19 @@ inputfiles.files=file1.txt,file2.txt,file3.txt
 java -Dproperties=config.properties -jar DocumentSearchMain.jar
 
 ```
+
+
+##### How to test?
+The below command will run all unit tests. 
+``
+mvn clean test
+``
+
+##### Performance test
+
+Performance testing is done by calling the search method of each of the implementations 2000000 times and comparing the 
+run times. At a step size of 20,000 a new random token is chosen. The time is the added value over all the iterations.
+
+To run the performance test simply execute the PerformanceTest main jar
+`java -jar PerformanceTest.jar`
+
