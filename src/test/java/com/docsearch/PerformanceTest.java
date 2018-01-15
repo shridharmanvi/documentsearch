@@ -53,21 +53,19 @@ public class PerformanceTest {
 
             long start;
             long end;
-            long total = 0;
 
-            for (int j = 0; j < 10; j++) {
-                // Get random search token
-                String token = getRandomWord(allTokens);
-                search.setAndValidateToken(token);
+            String token = getRandomWord(allTokens);
+            search.setAndValidateToken(token);
 
+            start = System.currentTimeMillis();
 
-                start = System.currentTimeMillis();
-                for (int i = 0; i < iterations / 10; i++) {
-                    search.search(token);
-                }
-                end = System.currentTimeMillis();
-                total += end - start;
+            for (int i = 0; i < iterations; i++) {
+                search.search(token);
             }
+            end = System.currentTimeMillis();
+            
+            long total = end - start;
+
 
             System.out.println("Method " + documentSearchType + " took " + total + "ms for 2000000 iterartions.");
 

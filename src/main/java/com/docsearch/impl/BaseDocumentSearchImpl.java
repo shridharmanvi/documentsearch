@@ -43,10 +43,12 @@ public class BaseDocumentSearchImpl implements DocumentSearch {
             List<String> lines = new ArrayList<>();
 
             while ((line = bufferedReader.readLine()) != null) {
-                String cleanLine = line.replaceAll(SPECIALCHARS, "");
-                lines.add(cleanLine);
-            }
+                String cleanLine = line.replaceAll(SPECIALCHARS, " ");
+                if (!StringUtils.isEmpty(cleanLine)) {
+                    lines.add(cleanLine);
+                }
 
+            }
             FileNode fileNode = new FileNode(fileName, lines);
             fileNodes.add(fileNode);
         }
