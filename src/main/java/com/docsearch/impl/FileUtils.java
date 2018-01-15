@@ -11,13 +11,4 @@ public class FileUtils {
         BufferedReader br = new BufferedReader(fileReader);
         return br;
     }
-
-    private static void setPropertiesFileLocations() {
-        Object p = System.getProperty("plugins.properties");
-        if (p == null || ((String) p).length() == 0) {
-            System.setProperty("plugins.properties", "classpath:properties/config.properties");
-        } else {
-            System.setProperty("plugins.properties", "file:" + p);
-        }
-    }
 }
