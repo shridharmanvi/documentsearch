@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Class responsible for driving the document search program
  */
-public class DocumentSearchDriver {
+class DocumentSearchDriver {
 
     private int method;
     private String token;
@@ -20,7 +20,7 @@ public class DocumentSearchDriver {
     private Queue<ResultSetNode> relevancy;
     private static Properties config;
 
-    public DocumentSearchDriver() {
+    DocumentSearchDriver() {
         config = new Properties();
         relevancy = null;
         documentSearch = null;
@@ -29,7 +29,7 @@ public class DocumentSearchDriver {
         readConfig();
     }
 
-    public void getUserInputAndSetUp() {
+    void getUserInputAndSetUp() {
         try (Scanner scan = new Scanner(System.in)) {
 
             System.out.println("Enter the search token:");
@@ -65,7 +65,7 @@ public class DocumentSearchDriver {
         }
     }
 
-    public static String[] getInputFileNames() {
+    static String[] getInputFileNames() {
         config = readConfig();
         String[] files = config.getProperty("inputfiles.files").split(",");
         String inputDir = config.getProperty("inputfiles.dir");
@@ -77,7 +77,7 @@ public class DocumentSearchDriver {
         return fullNames;
     }
 
-    static Properties readConfig() {
+    private static Properties readConfig() {
         if (config == null || config.size() == 0) {
             try {
                 InputStream inputStream = DocumentSearchDriver.class

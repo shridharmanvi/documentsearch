@@ -38,7 +38,7 @@ public class SimpleDocumentSearch extends BaseDocumentSearchImpl {
     public int searchToken(String token, String line) {
         int count = 0;
         for (String word : line.split(" ")) {
-            if (word.replaceAll(SPECIALCHARS, "").equals(token)) {
+            if (word.equals(token)) {
                 count++;
             }
         }
